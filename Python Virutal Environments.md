@@ -515,3 +515,43 @@ drwxr-xr-x  8 barnysanchez  staff   256B Mar 27 17:05 ..
 hello
 (app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist 
 ```
+
+> Step 7: Finally, what if I want to clean/delete the virtual environment?  I will show how. This doesn't mean I am wiping the project my code, but instead deactivating and removing the virtual environment. 
+
+```
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  cd
+ barnysanchez@IBM3R  ~ 
+ barnysanchez@IBM3R  ~  pyenv versions
+* system (set by /Users/barnysanchez/.python-version)
+  3.7.7
+  3.7.7/envs/app2
+  3.8.1
+  app2
+ barnysanchez@IBM3R  ~  pyenv uninstall 3.7.7/envs/app2
+pyenv-virtualenv: remove /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2? yes
+ barnysanchez@IBM3R  ~  cd Documents/GitHub/TEST2
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
+__pycache__ build       dist        hello.py    hello.spec
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+pyenv: version `app2' is not installed (set by /Users/barnysanchez/Documents/GitHub/TEST2/.python-version)
+ ✘ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  lsa
+total 24
+drwxr-xr-x  8 barnysanchez  staff   256B Mar 27 17:05 .
+drwxr-xr-x@ 9 barnysanchez  staff   288B Mar 27 16:40 ..
+-rw-r--r--  1 barnysanchez  staff     5B Mar 27 17:00 .python-version
+drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:05 __pycache__
+drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:05 build
+drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:05 dist
+-rw-r--r--  1 barnysanchez  staff    15B Mar 27 17:03 hello.py
+-rw-r--r--  1 barnysanchez  staff   867B Mar 27 17:05 hello.spec
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  rm -rf .python-version
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+Python 2.7.16
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
+__pycache__ build       dist        hello.py    hello.spec
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv versions
+* system (set by /Users/barnysanchez/.python-version)
+  3.7.7
+  3.8.1
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+ ```
