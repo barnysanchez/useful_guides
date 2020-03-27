@@ -1,4 +1,4 @@
-# Python Virtualization
+# Python Virtualization Environments
 
 Disclaimer:  A lot of the steps and information in this document were not my own. In some cases I copied verbatim and redacted sections to adjust to my overall intention. 
 
@@ -80,10 +80,10 @@ https://www.freecodecamp.org/news/manage-multiple-python-versions-and-virtual-en
 ### What was the desired project:
 
 1) Simple "hello world" script.
-2) Code the previous in Python 3.7.6.
+2) Code the previous in Python 3.7.7.
 3) Create a 1-single file executable/distrutable file of the previous using *pyinstaller*.
 
-Why that specific version of Python?  because at the time of this writing *[pyinstaller](https://www.pyinstaller.org/)* supported Python versions Python 2.7 and 3.5—3.7, and *pyenv* as we will discover in a moment, at the time had Python 3.7.6 as the latest 3.7.x version listed. 
+Why that specific version of Python?  because at the time of this writing *[pyinstaller](https://www.pyinstaller.org/)* supported Python versions Python 2.7 and 3.5—3.7, and *pyenv* as we will discover in a moment, at the time had Python 3.7.7 as the latest 3.7.x version listed. 
 
 ### Steps:
 
@@ -111,7 +111,7 @@ pyenv install --list
 pyenv install 3.7.7
 ```
 
-***HOWEVER, PAY ATTENTION*** the previous will install things with no problems. If I ran previous command this is what I would get
+***HOWEVER, PAY ATTENTION*** the previous will install things with no problems. If I ran previous command this is what I would get:
 
 ```
 barnysanchez@IBM3R > pyenv install 3.7.7
@@ -139,7 +139,7 @@ Installed Python-3.7.7 to /Users/barnysanchez/.pyenv/versions/3.7.7
 barnysanchez@IBM3R > eval "$(pyenv init -)"
 ```
 
-***Why did I do those crazy commands?*** because later on when I tried this the first time and used `pyinstaller` later to make my package, I ran into problems, and searching for answers I came across 2 links that explained that I needed to build with CPython shared-library enabled. References:
+***Why did I do those crazy commands?*** because when I tried this the first time and used `pyinstaller` to make my package, I ran into problems, and searching for answers I came across 2 links that explained that I needed to build with CPython shared-library enabled. References:
 
 https://stackoverflow.com/questions/58548730/how-to-use-pyinstaller-with-pipenv-pyenv   (scroll to the bottom, exactly what I followed)
 
@@ -321,4 +321,73 @@ https://realpython.com/python-virtual-environments-a-primer/
 
 ### > pyenv-virtualenv awesomeness!
 
-One thing I have to highligh is that following the link of option 2 gives some extra functionality like automatically activate/deactive an environment. Again this is the link provided before up in this document:  https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c
+One thing I have to highligh is that the link of option 2 gives some extra functionality like automatically activate/deactive an environment. Again the link provided before in this document:  https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c
+
+------------
+
+## F) PUTTING Option 1 and Option 2 TOGETHER INTO PRACTICE
+
+I am trying to recreate the exercise from point D, except that rather than using `pyenv` + `venv`, I am showing `pyenv` + `pyenv-virtualenv`.
+
+> Step 1: Install pyenv-virtualenv (it assumes you have already pyenv installed)
+
+Follow the details in the link: https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c
+
+The only observation/change to be made is that if you are using Zsh shell like me, then any references to `.bash_profile` need to be changed to `.zshrc`.
+
+> Step 2: Create the virtual environmment. First create the directory of where you want the code and cd to it. From the output below notice how I am showing that the Python in operation is the system one until I install a new one. 
+
+```
+ barnysanchez@IBM3R  ~/Documents/GitHub  pwd
+/Users/barnysanchez/Documents/GitHub
+ barnysanchez@IBM3R  ~/Documents/GitHub  mkdir TEST2
+ barnysanchez@IBM3R  ~/Documents/GitHub  cd TEST2
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+Python 2.7.16
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv virtualenv 3.7.7 app2
+Looking in links: /var/folders/d1/6g5jtqx57lbdzcq48mw9cy9r0000gn/T/tmpa55kry4n
+Requirement already satisfied: setuptools in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (41.2.0)
+Requirement already satisfied: pip in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (19.2.3)
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv virtualenv 3.7.7 app3
+Looking in links: /var/folders/d1/6g5jtqx57lbdzcq48mw9cy9r0000gn/T/tmph5euf4rv
+Requirement already satisfied: setuptools in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app3/lib/python3.7/site-packages (41.2.0)
+Requirement already satisfied: pip in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app3/lib/python3.7/site-packages (19.2.3)
+ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+```
+
+> Step 3: Activate the virtual environment
+
+```
+barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv activate app2
+pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior.
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+```
+
+> Step 4: Update pip and install any packages you need (I am just updating pip here)
+
+```
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install --upgrade pip
+Collecting pip
+  Using cached https://files.pythonhosted.org/packages/54/0c/d01aa759fdc501a58f431eb594a17495f15b88da142ce14b5845662c13f3/pip-20.0.2-py2.py3-none-any.whl
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.0.2
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+```
+
+> Step 5: Code our app (in this case just a "hello world"). Let's also confirm we are in Python 3.7.7 for this environment while we are at it.
+
+```
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  echo "print('Hello world')" > app2.py
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
+app2.py
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+Python 3.7.7
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+```
+
+> Step 6: 
