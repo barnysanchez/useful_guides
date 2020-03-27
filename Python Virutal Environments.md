@@ -335,7 +335,26 @@ Follow the details in the link: https://medium.com/python-every-day/python-devel
 
 The only observation/change to be made is that if you are using Zsh shell like me, then any references to `.bash_profile` need to be changed to `.zshrc`.
 
-> Step 2: Create the virtual environmment. First create the directory of where you want the code and cd to it. From the output below notice how I am showing that the Python in operation is the system one until I install a new one. 
+> Step 2: Install the desired Python if not there already. From the output below notice how I am showing that the Python in operation is the system one. You are not activating the new install yet, simply getting things in order first. 
+
+```
+barnysanchez@IBM3R  ~/Documents/GitHub  python --version
+Python 2.7.16
+ barnysanchez@IBM3R  ~/Documents/GitHub  pyenv versions
+* system (set by /Users/barnysanchez/.python-version)
+  3.8.1
+ barnysanchez@IBM3R  ~/Documents/GitHub  env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.7.7
+python-build: use openssl@1.1 from homebrew
+python-build: use readline from homebrew
+Installing Python-3.7.7...
+python-build: use readline from homebrew
+python-build: use zlib from xcode sdk
+Installed Python-3.7.7 to /Users/barnysanchez/.pyenv/versions/3.7.7
+
+ barnysanchez@IBM3R  ~/Documents/GitHub 
+```
+
+> Step 3: Create and cd to the directory where you want your code to reside. Then create the virtual environment.
 
 ```
  barnysanchez@IBM3R  ~/Documents/GitHub  pwd
@@ -344,30 +363,78 @@ The only observation/change to be made is that if you are using Zsh shell like m
  barnysanchez@IBM3R  ~/Documents/GitHub  cd TEST2
  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
 Python 2.7.16
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv virtualenv 3.7.7 app2
-Looking in links: /var/folders/d1/6g5jtqx57lbdzcq48mw9cy9r0000gn/T/tmpa55kry4n
+barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv virtualenv 3.7.7 app2
+Looking in links: /var/folders/d1/6g5jtqx57lbdzcq48mw9cy9r0000gn/T/tmp3lnyaaot
 Requirement already satisfied: setuptools in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (41.2.0)
 Requirement already satisfied: pip in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (19.2.3)
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv virtualenv 3.7.7 app3
-Looking in links: /var/folders/d1/6g5jtqx57lbdzcq48mw9cy9r0000gn/T/tmph5euf4rv
-Requirement already satisfied: setuptools in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app3/lib/python3.7/site-packages (41.2.0)
-Requirement already satisfied: pip in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app3/lib/python3.7/site-packages (19.2.3)
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
 ```
 
-> Step 3: Activate the virtual environment
+> Step 4: Activate the virtual environment. Install also some library just for demoing purposes.
 
 ```
 barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv activate app2
 pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior.
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install django==2.2
+Collecting django==2.2
+  Using cached https://files.pythonhosted.org/packages/54/85/0bef63668fb170888c1a2970ec897d4528d6072f32dee27653381a332642/Django-2.2-py3-none-any.whl
+Collecting sqlparse (from django==2.2)
+  Using cached https://files.pythonhosted.org/packages/85/ee/6e821932f413a5c4b76be9c5936e313e4fc626b33f16e027866e1d60f588/sqlparse-0.3.1-py2.py3-none-any.whl
+Collecting pytz (from django==2.2)
+  Using cached https://files.pythonhosted.org/packages/e7/f9/f0b53f88060247251bf481fa6ea62cd0d25bf1b11a87888e53ce5b7c8ad2/pytz-2019.3-py2.py3-none-any.whl
+Installing collected packages: sqlparse, pytz, django
+Successfully installed django-2.2 pytz-2019.3 sqlparse-0.3.1
+WARNING: You are using pip version 19.2.3, however version 20.0.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
 (app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
 ```
 
-> Step 4: Update pip and install any packages you need (I am just updating pip here)
+> Step 5: Activate environment automatically. This step is crucial in creating the `.python-version` files needed locally so that next time you cd in and out of the directory, the system activates or deactivates the environment automatically. Pay attention to the outputs in this section.
 
 ```
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install --upgrade pip
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  lsa
+total 0
+drwxr-xr-x  2 barnysanchez  staff    64B Mar 27 16:40 .
+drwxr-xr-x@ 9 barnysanchez  staff   288B Mar 27 16:40 ..
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv local app2
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  lsa
+total 8
+drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:00 .
+drwxr-xr-x@ 9 barnysanchez  staff   288B Mar 27 16:40 ..
+-rw-r--r--  1 barnysanchez  staff     5B Mar 27 17:00 .python-version
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+Python 3.7.7
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  cd ..
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub  source deactivate
+pyenv-virtualenv: deactivate 3.7.7/envs/app2
+ barnysanchez@IBM3R  ~/Documents/GitHub 
+ barnysanchez@IBM3R  ~/Documents/GitHub  cd TEST2
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  cd ..
+ barnysanchez@IBM3R  ~/Documents/GitHub  python --version
+Python 2.7.16
+ barnysanchez@IBM3R  ~/Documents/GitHub  cd TEST2
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+Python 3.7.7
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv versions
+  system
+  3.7.7
+  3.7.7/envs/app2
+  3.8.1
+* app2 (set by /Users/barnysanchez/Documents/GitHub/TEST2/.python-version)
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+```
+
+> Step 6: Code an app and create the installer at this time. Notice how I updated `pip`, installed `pyinstaller` and then did the frozen binary. Even though `pyinstaller` was already installed in my system, because we are in a virtual environment, it "ignores" the installation at the system level.
+
+```
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  echo "print('hello')" > hello.py
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyinstaller --onefile hello.py
+zsh: command not found: pyinstaller
+(app2)  ✘ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install --upgrade pip
 Collecting pip
   Using cached https://files.pythonhosted.org/packages/54/0c/d01aa759fdc501a58f431eb594a17495f15b88da142ce14b5845662c13f3/pip-20.0.2-py2.py3-none-any.whl
 Installing collected packages: pip
@@ -375,19 +442,76 @@ Installing collected packages: pip
     Uninstalling pip-19.2.3:
       Successfully uninstalled pip-19.2.3
 Successfully installed pip-20.0.2
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install pyinstaller
+Processing /Users/barnysanchez/Library/Caches/pip/wheels/62/fe/62/4c0f196d1e0dd689e097449bc81d7d585a7de7dd86b081b80b/PyInstaller-3.6-cp37-none-any.whl
+Requirement already satisfied: setuptools in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (from pyinstaller) (41.2.0)
+Collecting macholib>=1.8
+  Using cached macholib-1.14-py2.py3-none-any.whl (37 kB)
+Collecting altgraph
+  Using cached altgraph-0.17-py2.py3-none-any.whl (21 kB)
+Installing collected packages: altgraph, macholib, pyinstaller
+Successfully installed altgraph-0.17 macholib-1.14 pyinstaller-3.6
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyinstaller --onefile hello.py
+54 INFO: PyInstaller: 3.6
+55 INFO: Python: 3.7.7
+61 INFO: Platform: Darwin-19.3.0-x86_64-i386-64bit
+62 INFO: wrote /Users/barnysanchez/Documents/GitHub/TEST2/hello.spec
+67 INFO: UPX is not available.
+68 INFO: Extending PYTHONPATH with paths
+['/Users/barnysanchez/Documents/GitHub/TEST2',
+ '/Users/barnysanchez/Documents/GitHub/TEST2']
+68 INFO: checking Analysis
+68 INFO: Building Analysis because Analysis-00.toc is non existent
+69 INFO: Initializing module dependency graph...
+71 INFO: Caching module graph hooks...
+74 INFO: Analyzing base_library.zip ...
+1545 INFO: Processing pre-find module path hook   distutils
+1545 INFO: distutils: retargeting to non-venv dir '/Users/barnysanchez/.pyenv/versions/3.7.7/lib/python3.7'
+2512 INFO: Caching module dependency graph...
+2594 INFO: running Analysis Analysis-00.toc
+2600 INFO: Analyzing /Users/barnysanchez/Documents/GitHub/TEST2/hello.py
+2602 INFO: Processing module hooks...
+2602 INFO: Loading module hook "hook-encodings.py"...
+2658 INFO: Loading module hook "hook-sysconfig.py"...
+2666 INFO: Loading module hook "hook-xml.py"...
+2875 INFO: Loading module hook "hook-pydoc.py"...
+2876 INFO: Loading module hook "hook-distutils.py"...
+2893 INFO: Looking for ctypes DLLs
+2894 INFO: Analyzing run-time hooks ...
+2898 INFO: Looking for dynamic libraries
+2984 INFO: Looking for eggs
+2984 INFO: Using Python library /Users/barnysanchez/.pyenv/versions/3.7.7/lib/libpython3.7m.dylib
+2986 INFO: Warnings written to /Users/barnysanchez/Documents/GitHub/TEST2/build/hello/warn-hello.txt
+3003 INFO: Graph cross-reference written to /Users/barnysanchez/Documents/GitHub/TEST2/build/hello/xref-hello.html
+3017 INFO: checking PYZ
+3017 INFO: Building PYZ because PYZ-00.toc is non existent
+3017 INFO: Building PYZ (ZlibArchive) /Users/barnysanchez/Documents/GitHub/TEST2/build/hello/PYZ-00.pyz
+3281 INFO: Building PYZ (ZlibArchive) /Users/barnysanchez/Documents/GitHub/TEST2/build/hello/PYZ-00.pyz completed successfully.
+3286 INFO: checking PKG
+3286 INFO: Building PKG because PKG-00.toc is non existent
+3286 INFO: Building PKG (CArchive) PKG-00.pkg
+5466 INFO: Building PKG (CArchive) PKG-00.pkg completed successfully.
+5471 INFO: Bootloader /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages/PyInstaller/bootloader/Darwin-64bit/run
+5471 INFO: checking EXE
+5471 INFO: Building EXE because EXE-00.toc is non existent
+5471 INFO: Building EXE from EXE-00.toc
+5472 INFO: Appending archive to EXE /Users/barnysanchez/Documents/GitHub/TEST2/dist/hello
+5492 INFO: Fixing EXE for code signing /Users/barnysanchez/Documents/GitHub/TEST2/dist/hello
+5508 INFO: Building EXE from EXE-00.toc completed successfully.
 (app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-```
-
-> Step 5: Code our app (in this case just a "hello world"). Let's also confirm we are in Python 3.7.7 for this environment while we are at it.
-
-```
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  echo "print('Hello world')" > app2.py
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
 (app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
-app2.py
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
-Python 3.7.7
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+__pycache__ build       dist        hello.py    hello.spec
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  cd dist
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  ls
+hello
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  lsa
+total 10536
+drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:05 .
+drwxr-xr-x  8 barnysanchez  staff   256B Mar 27 17:05 ..
+-rwxr-xr-x  1 barnysanchez  staff   5.1M Mar 27 17:05 hello
+(app2)  ✘ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  ./hello
+hello
+(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist 
 ```
-
-> Step 6: 
