@@ -29,7 +29,7 @@ Unravel your Google search expertise and quickly will find several solutions, an
 
 ### Option 1: pyenv
 
-This is a solution that allows you install multiple versions of Python and switch between one and the other. You can set a global version of Python with Pyenv, or you can specify a Python version on a per directory basis if you want. 
+A Python version manager. Installs different versions and flavors of Python interpreters.This is a solution that allows you install multiple versions of Python and switch between one and the other. You can set a global version of Python with Pyenv, or you can specify a Python version on a per directory basis if you want. 
 
 ### Option 2: pyenv-virtualenv
 
@@ -37,7 +37,20 @@ The pyenv-virtualenv is a pyenv plugin that helps you manage virtual environment
 
 ### Option 3: venv
 
-If you are using a single Python version and need to just isolate projects in different virtual environments, then this is the way to go.
+A tool to create isolated virtual environments from a Python interpreter. If you are using a single Python version and need to just isolate projects in different virtual environments, then this is the way to go. You can however mix venv and pyenv to have isolated projects operating in different versions.
+
+### Option 4: pyvenv
+
+Notice that it may get you confused with Option's 2 pyenv-virtualenv but they are different. Basically pyvenv was the tool recommended at some point but now deprecated.
+
+> From Pydocs: https://docs.python.org/3/library/venv.html
+
+```
+Deprecated since version 3.6: pyvenv was the recommended tool for creating virtual environments for Python 3.3 and 3.4, and is deprecated in Python 3.6.
+
+Changed in version 3.5: The use of venv is now recommended for creating virtual environments.
+```
+
 
 ## C) Details of the previous options
 
@@ -123,7 +136,7 @@ python-build: use readline from homebrew
 python-build: use zlib from xcode sdk
 Installed Python-3.7.7 to /Users/barnysanchez/.pyenv/versions/3.7.7
 
- barnysanchez@IBM3R > eval "$(pyenv init -)"
+barnysanchez@IBM3R > eval "$(pyenv init -)"
 ```
 
 ***Why did I do those crazy commands?*** because later on when I tried this the first time and used `pyinstaller` later to make my package, I ran into problems, and searching for answers I came across 2 links that explained that I needed to build with CPython shared-library enabled. References:
@@ -301,27 +314,11 @@ barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2/dist >
 
 https://pyinstaller.readthedocs.io/en/stable/usage.html  (details on usage)
 
-### > About pyenv 
-
 ### > Primer on virtual environments (extra read)
 
 https://realpython.com/python-virtual-environments-a-primer/
 
 
-### > PYENV, PYVENV, VIRTUALENV – WHAT’S THE DIFFERENCE?
+### > pyenv-virtualenv awesomeness!
 
-http://masnun.com/2016/04/10/python-pyenv-pyvenv-virtualenv-whats-the-difference.html
-
-The previous article explains why I used options 1 and 3 for my project, given that `pyvenv` (option 2) is similar to `virtualenv` (option 3), while pyenv is a totally different kind of tool.
-
-    Summary
-
-    pyenv – A Python version manager. Installs different versions and flavors of Python interpreters.
-
-    pyvenv – A tool to create isolated virtual environments from a Python interpreter. Ships with Python from 3.4.
-
-    virtualenv – Creates virtual environments, available in PyPi.
-
-    So pyvenv is comparable to virtualenv while pyenv is a totally different kind of tool.
-
-One thing I have to highligh is that following the link of option 2 gives some extra functionality like automatically activate/deactive an environment. Again this is the this link provided before up in this document:  https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c
+One thing I have to highligh is that following the link of option 2 gives some extra functionality like automatically activate/deactive an environment. Again this is the link provided before up in this document:  https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c
