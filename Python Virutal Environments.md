@@ -114,7 +114,7 @@ pyenv install 3.7.7
 ***HOWEVER, PAY ATTENTION*** the previous will install things with no problems. If I ran previous command this is what I would get:
 
 ```
-barnysanchez@IBM3R > pyenv install 3.7.7
+barnysanchez@MAC > pyenv install 3.7.7
 python-build: use openssl@1.1 from homebrew
 python-build: use readline from homebrew
 Downloading Python-3.7.7.tar.xz...
@@ -128,7 +128,7 @@ Installed Python-3.7.7 to /Users/barnysanchez/.pyenv/versions/3.7.7
 ***but you want to do this instead...***
 
 ```
-barnysanchez@IBM3R > env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.7.7
+barnysanchez@MAC > env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.7.7
 python-build: use openssl@1.1 from homebrew
 python-build: use readline from homebrew
 Installing Python-3.7.7...
@@ -136,7 +136,7 @@ python-build: use readline from homebrew
 python-build: use zlib from xcode sdk
 Installed Python-3.7.7 to /Users/barnysanchez/.pyenv/versions/3.7.7
 
-barnysanchez@IBM3R > eval "$(pyenv init -)"
+barnysanchez@MAC > eval "$(pyenv init -)"
 ```
 
 ***Why did I do those crazy commands?*** because when I tried this the first time and used `pyinstaller` to make my package, I ran into problems, and searching for answers I came across 2 links that explained that I needed to build with CPython shared-library enabled. References:
@@ -175,38 +175,38 @@ Now I will map all the previous steps to the actual output when I typed it all i
 > Step 1: Verify that system Python was still 2.7.16
 
 ```
-barnysanchez@IBM3R > python --version
+barnysanchez@MAC > python --version
 Python 2.7.16
 ```
 
 > Step 2: Create a new directory that would host new project and cd to it
 
 ``` 
-barnysanchez@IBM3R > pwd
+barnysanchez@MAC > pwd
 /Users/barnysanchez
- barnysanchez@IBM3R > cd Documents/GitHub
- barnysanchez@IBM3R > ~/Documents/GitHub > mkdir PROJECT2
- barnysanchez@IBM3R > ~/Documents/GitHub > cd PROJECT2
+ barnysanchez@MAC > cd Documents/GitHub
+ barnysanchez@MAC > ~/Documents/GitHub > mkdir PROJECT2
+ barnysanchez@MAC > ~/Documents/GitHub > cd PROJECT2
 ```
 
 > Step 3: Set the Python 3.7.7 for that working environment (that directory and anything underneath it)
 
 ```
-barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2 > pyenv local 3.7.7
- barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2 > python --version
+barnysanchez@MAC > ~/Documents/GitHub/PROJECT2 > pyenv local 3.7.7
+ barnysanchez@MAC > ~/Documents/GitHub/PROJECT2 > python --version
 Python 3.7.7
 ```
 
 > Step 4: Create the virtual environment at that point, which will "inherit" the Python running in that directory
 
 ```
-barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2 > python -m venv app2
+barnysanchez@MAC > ~/Documents/GitHub/PROJECT2 > python -m venv app2
 ```
 
 > Step 5: Update pip package and install pyinstaller
 
 ```
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2 > pip install --upgrade pip
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 > pip install --upgrade pip
 Collecting pip
   Using cached https://files.pythonhosted.org/packages/54/0c/d01aa759fdc501a58f431eb594a17495f15b88da142ce14b5845662c13f3/pip-20.0.2-py2.py3-none-any.whl
 Installing collected packages: pip
@@ -214,7 +214,7 @@ Installing collected packages: pip
     Uninstalling pip-19.2.3:
       Successfully uninstalled pip-19.2.3
 Successfully installed pip-20.0.2
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2 > pip install pyinstaller
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 > pip install pyinstaller
 Processing /Users/barnysanchez/Library/Caches/pip/wheels/62/fe/62/4c0f196d1e0dd689e097449bc81d7d585a7de7dd86b081b80b/PyInstaller-3.6-cp37-none-any.whl
 Collecting macholib>=1.8
   Using cached macholib-1.14-py2.py3-none-any.whl (37 kB)
@@ -223,19 +223,19 @@ Collecting altgraph
 Requirement already satisfied: setuptools in ./lib/python3.7/site-packages (from pyinstaller) (41.2.0)
 Installing collected packages: altgraph, macholib, pyinstaller
 Successfully installed altgraph-0.17 macholib-1.14 pyinstaller-3.6
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 >
 ```
 
 > Step 6: Code our app (in this case just a "hello world")
 
 ```
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2 > echo "print('Hello world :) !!!')" > app2.py
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 > echo "print('Hello world :) !!!')" > app2.py
 ```
 
 > Step 7: Create the single-file program with pyinstaller
 
 ```
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2 > pyinstaller --onefile app2.py
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 > pyinstaller --onefile app2.py
 
 99 INFO: PyInstaller: 3.6
 99 INFO: Python: 3.7.7
@@ -288,22 +288,22 @@ Successfully installed altgraph-0.17 macholib-1.14 pyinstaller-3.6
 > Step 8: Test the install file (under /dist directory)
 
 ```
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2 > cd dist
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2/dist > ls -al
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 > cd dist
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2/dist > ls -al
 total 10536
 drwxr-xr-x   3 barnysanchez  staff       96 Mar 26 20:18 .
 drwxr-xr-x  11 barnysanchez  staff      352 Mar 26 20:18 ..
 -rwxr-xr-x   1 barnysanchez  staff  5393109 Mar 26 20:18 app2
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2/dist > ./app2
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2/dist > ./app2
 Hello world :) !!!
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2/dist >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2/dist >
 ```
 
 > Step 9: Exit (deactivate) the virtual environment
 
 ```
-(app2)  barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2/dist > deactivate
-barnysanchez@IBM3R > ~/Documents/GitHub/PROJECT2/app2/dist >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2/dist > deactivate
+barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2/dist >
 ```
 
 ------------
@@ -338,12 +338,12 @@ The only observation/change to be made is that if you are using Zsh shell like m
 > Step 2: Install the desired Python if not there already. From the output below notice how I am showing that the Python in operation is the system one. You are not activating the new install yet, simply getting things in order first. 
 
 ```
-barnysanchez@IBM3R  ~/Documents/GitHub  python --version
+barnysanchez@MAC > ~/Documents/GitHub > python --version
 Python 2.7.16
- barnysanchez@IBM3R  ~/Documents/GitHub  pyenv versions
+ barnysanchez@MAC > ~/Documents/GitHub > pyenv versions
 * system (set by /Users/barnysanchez/.python-version)
   3.8.1
- barnysanchez@IBM3R  ~/Documents/GitHub  env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.7.7
+ barnysanchez@MAC > ~/Documents/GitHub > env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.7.7
 python-build: use openssl@1.1 from homebrew
 python-build: use readline from homebrew
 Installing Python-3.7.7...
@@ -351,31 +351,31 @@ python-build: use readline from homebrew
 python-build: use zlib from xcode sdk
 Installed Python-3.7.7 to /Users/barnysanchez/.pyenv/versions/3.7.7
 
- barnysanchez@IBM3R  ~/Documents/GitHub 
+ barnysanchez@MAC > ~/Documents/GitHub >
 ```
 
 > Step 3: Create and cd to the directory where you want your code to reside. Then create the virtual environment.
 
 ```
- barnysanchez@IBM3R  ~/Documents/GitHub  pwd
+ barnysanchez@MAC > ~/Documents/GitHub > pwd
 /Users/barnysanchez/Documents/GitHub
- barnysanchez@IBM3R  ~/Documents/GitHub  mkdir TEST2
- barnysanchez@IBM3R  ~/Documents/GitHub  cd TEST2
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+ barnysanchez@MAC > ~/Documents/GitHub > mkdir TEST2
+ barnysanchez@MAC > ~/Documents/GitHub > cd TEST2
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > python --version
 Python 2.7.16
-barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv virtualenv 3.7.7 app2
+barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pyenv virtualenv 3.7.7 app2
 Looking in links: /var/folders/d1/6g5jtqx57lbdzcq48mw9cy9r0000gn/T/tmp3lnyaaot
 Requirement already satisfied: setuptools in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (41.2.0)
 Requirement already satisfied: pip in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (19.2.3)
-barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
 ```
 
 > Step 4: Activate the virtual environment. Install also some library just for demoing purposes.
 
 ```
-barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv activate app2
+barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pyenv activate app2
 pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior.
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install django==2.2
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pip install django==2.2
 Collecting django==2.2
   Using cached https://files.pythonhosted.org/packages/54/85/0bef63668fb170888c1a2970ec897d4528d6072f32dee27653381a332642/Django-2.2-py3-none-any.whl
 Collecting sqlparse (from django==2.2)
@@ -386,55 +386,55 @@ Installing collected packages: sqlparse, pytz, django
 Successfully installed django-2.2 pytz-2019.3 sqlparse-0.3.1
 WARNING: You are using pip version 19.2.3, however version 20.0.2 is available.
 You should consider upgrading via the 'pip install --upgrade pip' command.
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
 ```
 
 > Step 5: Activate environment automatically. This step is crucial in creating the `.python-version` files needed locally so that next time you cd in and out of the directory, the system activates or deactivates the environment automatically. Pay attention to the outputs in this section.
 
 ```
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  lsa
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > lsa
 total 0
 drwxr-xr-x  2 barnysanchez  staff    64B Mar 27 16:40 .
 drwxr-xr-x@ 9 barnysanchez  staff   288B Mar 27 16:40 ..
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv local app2
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  lsa
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pyenv local app2
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > lsa
 total 8
 drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:00 .
 drwxr-xr-x@ 9 barnysanchez  staff   288B Mar 27 16:40 ..
 -rw-r--r--  1 barnysanchez  staff     5B Mar 27 17:00 .python-version
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > python --version
 Python 3.7.7
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  cd ..
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub  source deactivate
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > cd ..
+(app2)  barnysanchez@MAC > ~/Documents/GitHub > source deactivate
 pyenv-virtualenv: deactivate 3.7.7/envs/app2
- barnysanchez@IBM3R  ~/Documents/GitHub 
- barnysanchez@IBM3R  ~/Documents/GitHub  cd TEST2
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  cd ..
- barnysanchez@IBM3R  ~/Documents/GitHub  python --version
+ barnysanchez@MAC > ~/Documents/GitHub >
+ barnysanchez@MAC > ~/Documents/GitHub > cd TEST2
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > cd ..
+ barnysanchez@MAC > ~/Documents/GitHub > python --version
 Python 2.7.16
- barnysanchez@IBM3R  ~/Documents/GitHub  cd TEST2
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+ barnysanchez@MAC > ~/Documents/GitHub > cd TEST2
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > python --version
 Python 3.7.7
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv versions
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pyenv versions
   system
   3.7.7
   3.7.7/envs/app2
   3.8.1
 * app2 (set by /Users/barnysanchez/Documents/GitHub/TEST2/.python-version)
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
 ```
 
 > Step 6: Code an app and create the installer at this time. Notice how I updated `pip`, installed `pyinstaller` and then did the frozen binary. Even though `pyinstaller` was already installed in my system, because we are in a virtual environment, it "ignores" the installation at the system level.
 
 ```
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  echo "print('hello')" > hello.py
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyinstaller --onefile hello.py
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > echo "print('hello')" > hello.py
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pyinstaller --onefile hello.py
 zsh: command not found: pyinstaller
-(app2)  ✘ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install --upgrade pip
+(app2)  ✘ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pip install --upgrade pip
 Collecting pip
   Using cached https://files.pythonhosted.org/packages/54/0c/d01aa759fdc501a58f431eb594a17495f15b88da142ce14b5845662c13f3/pip-20.0.2-py2.py3-none-any.whl
 Installing collected packages: pip
@@ -442,7 +442,7 @@ Installing collected packages: pip
     Uninstalling pip-19.2.3:
       Successfully uninstalled pip-19.2.3
 Successfully installed pip-20.0.2
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pip install pyinstaller
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pip install pyinstaller
 Processing /Users/barnysanchez/Library/Caches/pip/wheels/62/fe/62/4c0f196d1e0dd689e097449bc81d7d585a7de7dd86b081b80b/PyInstaller-3.6-cp37-none-any.whl
 Requirement already satisfied: setuptools in /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2/lib/python3.7/site-packages (from pyinstaller) (41.2.0)
 Collecting macholib>=1.8
@@ -451,7 +451,7 @@ Collecting altgraph
   Using cached altgraph-0.17-py2.py3-none-any.whl (21 kB)
 Installing collected packages: altgraph, macholib, pyinstaller
 Successfully installed altgraph-0.17 macholib-1.14 pyinstaller-3.6
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyinstaller --onefile hello.py
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pyinstaller --onefile hello.py
 54 INFO: PyInstaller: 3.6
 55 INFO: Python: 3.7.7
 61 INFO: Platform: Darwin-19.3.0-x86_64-i386-64bit
@@ -498,43 +498,43 @@ Successfully installed altgraph-0.17 macholib-1.14 pyinstaller-3.6
 5472 INFO: Appending archive to EXE /Users/barnysanchez/Documents/GitHub/TEST2/dist/hello
 5492 INFO: Fixing EXE for code signing /Users/barnysanchez/Documents/GitHub/TEST2/dist/hello
 5508 INFO: Building EXE from EXE-00.toc completed successfully.
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > ls
 __pycache__ build       dist        hello.py    hello.spec
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  cd dist
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  ls
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2 > cd dist
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2/dist > ls
 hello
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  lsa
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2/dist > lsa
 total 10536
 drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:05 .
 drwxr-xr-x  8 barnysanchez  staff   256B Mar 27 17:05 ..
 -rwxr-xr-x  1 barnysanchez  staff   5.1M Mar 27 17:05 hello
-(app2)  ✘ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  ./hello
+(app2)  ✘ barnysanchez@MAC > ~/Documents/GitHub/TEST2/dist > ./hello
 hello
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist 
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2/dist >
 ```
 
-> Step 7: Finally, what if I want to clean/delete the virtual environment?  I will show how. This doesn't mean I am wiping the project my code, but instead deactivating and removing the virtual environment. 
+> Step 7: Finally, what if I want to clean/delete the virtual environment?  I will show how. This doesn't mean I am wiping the project itself and my code, but instead deactivating and removing the virtual environment. 
 
 ```
-(app2)  barnysanchez@IBM3R  ~/Documents/GitHub/TEST2/dist  cd
- barnysanchez@IBM3R  ~ 
- barnysanchez@IBM3R  ~  pyenv versions
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/TEST2/dist > cd
+ barnysanchez@MAC > ~ >
+ barnysanchez@MAC > ~ > pyenv versions
 * system (set by /Users/barnysanchez/.python-version)
   3.7.7
   3.7.7/envs/app2
   3.8.1
   app2
- barnysanchez@IBM3R  ~  pyenv uninstall 3.7.7/envs/app2
+ barnysanchez@MAC > ~ > pyenv uninstall 3.7.7/envs/app2
 pyenv-virtualenv: remove /Users/barnysanchez/.pyenv/versions/3.7.7/envs/app2? yes
- barnysanchez@IBM3R  ~  cd Documents/GitHub/TEST2
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
+ barnysanchez@MAC > ~ > cd Documents/GitHub/TEST2
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > ls
 __pycache__ build       dist        hello.py    hello.spec
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > python --version
 pyenv: version `app2' is not installed (set by /Users/barnysanchez/Documents/GitHub/TEST2/.python-version)
- ✘ barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  lsa
+ ✘ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > lsa
 total 24
 drwxr-xr-x  8 barnysanchez  staff   256B Mar 27 17:05 .
 drwxr-xr-x@ 9 barnysanchez  staff   288B Mar 27 16:40 ..
@@ -544,14 +544,14 @@ drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:05 build
 drwxr-xr-x  3 barnysanchez  staff    96B Mar 27 17:05 dist
 -rw-r--r--  1 barnysanchez  staff    15B Mar 27 17:03 hello.py
 -rw-r--r--  1 barnysanchez  staff   867B Mar 27 17:05 hello.spec
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  rm -rf .python-version
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  python --version
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > rm -rf .python-version
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > python --version
 Python 2.7.16
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  ls
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > ls
 __pycache__ build       dist        hello.py    hello.spec
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2  pyenv versions
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 > pyenv versions
 * system (set by /Users/barnysanchez/.python-version)
   3.7.7
   3.8.1
- barnysanchez@IBM3R  ~/Documents/GitHub/TEST2 
+ barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
  ```
