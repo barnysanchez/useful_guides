@@ -308,24 +308,7 @@ barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2/dist >
 
 ------------
 
-## E) EXTRA GOODIES AND HIGHLIGHTS
-
-### > About pyinstaller 
-
-https://pyinstaller.readthedocs.io/en/stable/usage.html  (details on usage)
-
-### > Primer on virtual environments (extra read)
-
-https://realpython.com/python-virtual-environments-a-primer/
-
-
-### > pyenv-virtualenv awesomeness!
-
-One thing I have to highligh is that the link of option 2 gives some extra functionality like automatically activate/deactive an environment. Again the link provided before in this document:  https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c
-
-------------
-
-## F) PUTTING Option 1 and Option 2 TOGETHER INTO PRACTICE
+## E) PUTTING Option 1 and Option 2 TOGETHER INTO PRACTICE
 
 I am trying to recreate the exercise from point D, except that rather than using `pyenv` + `venv`, I am showing `pyenv` + `pyenv-virtualenv`.
 
@@ -555,3 +538,24 @@ __pycache__ build       dist        hello.py    hello.spec
   3.8.1
  barnysanchez@MAC > ~/Documents/GitHub/TEST2 >
  ```
+
+ ------------
+
+## F) EXTRA GOODIES AND HIGHLIGHTS
+
+### > About pyinstaller 
+
+https://pyinstaller.readthedocs.io/en/stable/usage.html  (details on usage)
+
+https://pythonhosted.org/PyInstaller/usage.html#building-mac-os-x-app-bundles (I found this other link days later and is more comprehensive. From this link I learned the use of --key option and how to use and the Mac bundle)
+
+### > Primer on virtual environments (extra read)
+
+https://realpython.com/python-virtual-environments-a-primer/
+
+
+### > pyenv-virtualenv awesomeness!
+
+One thing I have to highligh is that the link of option 2 gives some extra functionality like automatically activate/deactive an environment. Again the link provided before in this document:  https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c
+
+------------
