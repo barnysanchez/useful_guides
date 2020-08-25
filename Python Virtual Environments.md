@@ -1,6 +1,6 @@
 # Python Virtualization Environments
 
-Disclaimer:  A lot of the steps and information in this document were not my own. In some cases I copied verbatim and redacted sections to adjust to my overall intention. 
+Disclaimer:  A lot of the steps and information in this document was not my own. In some cases I copied verbatim and redacted sections to adjust to my overall intention. 
 
 To know...
 
