@@ -6,7 +6,7 @@ To know...
 
 **Multiple Python versions:** Different installations of Python on the same machine, 2.7 and 3.4 for example.
 
-**Virtual environments:** isolated independent environments that can have both a specific version of Python and of any project-specific packages installed within them, without affecting any other projects.
+**Virtual environments:** Refers to isolated independent environments that can have both a specific version of Python and of any project-specific packages installed within them, without affecting any other projects.
 
 A virtual environment (also called a venv) is a Python environment such that the Python interpreter, libraries and scripts installed into it are isolated from those installed in other virtual environments, and (by default) any libraries installed in a “system” Python, i.e. one which is installed as part of your operating system.
 
@@ -229,7 +229,7 @@ Successfully installed altgraph-0.17 macholib-1.14 pyinstaller-3.6
 > Step 6: Code our app (in this case just a "hello world")
 
 ```
-(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 > echo "print('Hello world :) !!!')" > app2.py
+(app2)  barnysanchez@MAC > ~/Documents/GitHub/PROJECT2/app2 > echo "print(f'Hello world!')" > app2.py
 ```
 
 > Step 7: Create the single-file program with pyinstaller
